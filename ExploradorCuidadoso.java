@@ -1,26 +1,21 @@
-package modelo;
+package br.com.cacaaotesouro;
 
-public class ExploradorCuidadoso extends Explorador implements Runnable {
+import java.util.concurrent.Semaphore;
 
-    public ExploradorCuidadoso(String nome, String tarefa) {
-        super(nome, "Cuidadoso", 2, tarefa);
+public class ExploradorCuidadoso extends Explorador {
+
+    public ExploradorCuidadoso(String nome, int prioridade, Tarefa tarefa, Semaphore semaforo) {
+        super(nome, "Cuidadoso", prioridade, tarefa, semaforo);
     }
 
     @Override
     public void executarTarefa() {
-        if (getTarefa() == null || getTarefa().isEmpty()) {
-            throw new IllegalArgumentException("TarefaInvalidaException: Tarefa nula ou inválida.");
-        }
-        System.out.println("Explorador: " + getNome() + " | Tipo: " + getTipo() + " | Status: Mapeando a floresta com cautela.");
-    }
-
-    @Override
-    public void run() {
+        System.out.println("Explorador: " + getNome() + " | Tipo: " + getTipo() + " | Status: " + getTarefa().getDescricao());
         try {
-            executarTarefa();
-        } catch (Exception e) {
-            System.out.println("Erro: " + e.getMessage() + " para " + getNome());
+            // Explorador cuidadoso demora mais tempo analisando o terreno (simulação)
+            Thread.sleep(2500); 
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 }
-
