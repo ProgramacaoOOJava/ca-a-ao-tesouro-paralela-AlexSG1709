@@ -1,4 +1,28 @@
-/**
+package modelo;
+
+public abstract class Explorador {
+    private String nome;
+    private String tipo;
+    private int prioridade;
+    private String tarefa;
+
+    public Explorador(String nome, String tipo, int prioridade, String tarefa) {
+        this.nome = nome;
+        this.tipo = tipo;
+        this.prioridade = prioridade;
+        this.tarefa = tarefa;
+    }
+
+    public abstract void executarTarefa();
+
+    // Getters e Setters
+    public String getNome() { return nome; }
+    public String getTipo() { return tipo; }
+    public int getPrioridade() { return prioridade; }
+    public String getTarefa() { return tarefa; }
+    
+    public void setTarefa(String tarefa) { this.tarefa = tarefa; }
+}/**
  * Classe abstrata que representa um explorador na Caça ao Tesouro Paralela.
  * Define a estrutura básica para diferentes tipos de exploradores.
  */
