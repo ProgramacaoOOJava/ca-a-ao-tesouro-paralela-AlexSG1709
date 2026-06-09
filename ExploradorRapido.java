@@ -1,25 +1,21 @@
-package modelo;
+package br.com.cacaaotesouro;
 
-public class ExploradorRapido extends Explorador implements Runnable {
-    
-    public ExploradorRapido(String nome, String tarefa) {
-        super(nome, "Rápido", 1, tarefa);
+import java.util.concurrent.Semaphore;
+
+public class ExploradorRapido extends Explorador {
+
+    public ExploradorRapido(String nome, int prioridade, Tarefa tarefa, Semaphore semaforo) {
+        super(nome, "Rápido", prioridade, tarefa, semaforo);
     }
 
     @Override
     public void executarTarefa() {
-        if (getTarefa() == null || getTarefa().isEmpty()) {
-            throw new IllegalArgumentException("TarefaInvalidaException: Tarefa nula ou inválida.");
-        }
-        System.out.println("Explorador: " + getNome() + " | Tipo: " + getTipo() + " | Status: Vasculhando a caverna rapidamente!");
-    }
-
-    @Override
-    public void run() {
+        System.out.println("Explorador: " + getNome() + " | Tipo: " + getTipo() + " | Status: " + getTarefa().getDescricao());
         try {
-            executarTarefa();
-        } catch (Exception e) {
-            System.out.println("Erro: " + e.getMessage() + " para " + getNome());
+            // Explorador rápido termina a ação em menos tempo (simulação)
+            Thread.sleep(1000); 
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 }
